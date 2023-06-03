@@ -4,18 +4,30 @@ import { Card } from '@rneui/themed';
 import { pb } from '../Plugins/pocketbase';
 import ListBox from "../Components/ListBox"
 
+import {  useFonts, ChakraPetch_400Regular,ChakraPetch_500Medium} from '@expo-google-fonts/chakra-petch';
+
 
 export function StartScreen({navigation}) {
+    let [fontsLoaded] = useFonts({
+        ChakraPetch_400Regular,ChakraPetch_500Medium
+      })
+    
+
+
+
+
     const [load,setLoad] = React.useState(false);
     const [board,setBoard] = React.useState([]);
     React.useEffect(() => {
         pb.collection('leaderboard').getFullList({
             sort: '-created',
         })
-        .then(setBoard).finally( () =>setLoad(false));
+        .then(setBoard).finally( () =>setLoad(true));
     });
+
+    if (load && fontsLoaded) {
     return (
-        <View style={{  flex:1, justifyContent:"center", }}>
+        <ScrollView style={{  flex:1  }}>
             <Card containerStyle = {style.main}>
                 
                     <Text style = {style.CardTitle}>Genema</Text>
@@ -25,32 +37,38 @@ export function StartScreen({navigation}) {
                 {buttonyes("ADMIN",() => navigation.navigate('AdminScreen'))} 
 
             </Card>
+
+
+            <View style={{ position:"relative", width:'auto', height:60 }}>
+                <Text style={style.textMain}>{'Leaderboard'}</Text>
+            </View>
+
             <Card style = {style.Main}>
-                <ScrollView style={style.centerAuto}>
+            
+            <View style={style.centerAuto}>
+
             {/* {board.map((entry) => (<><Text>Name: {entry.name} </Text><Text>Score: {entry.score}</Text></>))} */}
 
 
-    
-      
-        <View style={{ position:"relative" }}>
-            <Text style={style.textMain}>Leaderboard</Text>
-        </View>
-
-        {board.map(({ id, name, score },index) => {
-            return (
-                <ListBox id={id} name={name} score={score} place={index+1}/>
-            )
-        })}
+            {board.map(({ id, name, score },index) => {
+                return (
+                    <ListBox id={id} name={name} score={score} place={index+1}/>
+                )
+            })}
         
         
 
 
 
-            </ScrollView>
+            </View>
             </Card>
-        </View>
+        </ScrollView>
 
     );
+    }
+    else {
+        return (<Text>Loading</Text>)
+    }
 }
 
 
@@ -78,8 +96,10 @@ const style = StyleSheet.create({
         margin: 10,
         padding: 10    
     },textMain: {
+        fontFamily:'ChakraPetch_400Regular',
         fontSize: 32,
         textAlign: "center",
+        
     
         // fontFamily: "Chakra Petch",
       },
