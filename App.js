@@ -11,6 +11,9 @@ export const scoreContext = React.createContext(0);
 export default function App() {
   let [currentScore, setCurrentScore] = React.useState(0);
 
+  /**
+ * @param {number} score
+ */
   function setScore(score) {
     setCurrentScore(score);
   }

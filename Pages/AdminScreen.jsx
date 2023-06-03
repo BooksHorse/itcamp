@@ -16,7 +16,7 @@ export function AdminScreen({navigation}) {
     return (
         <View >
             
-            {load && board.map((bo) =>boardentry(bo) ) }
+            {load && board.map((bo) =>boardentry(bo), key={id} )  }
         </View>
 
     );
