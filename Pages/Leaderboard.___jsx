@@ -1,0 +1,58 @@
+import React, { useState, useEffect } from 'react';
+import { Text, StyleSheet, ScrollView, View } from 'react-native';
+import { pb } from '../Plugins/pocketbase';
+import ListBox from '../components/ListBox';
+
+export function Leaderboard() {
+
+    const [name, setName] = useState("")
+    const [score, setScore] = useState(0)
+    const [items, setItems] = useState([])
+
+    useEffect(() => {
+        getdata();
+      }, []);
+
+      const getdata = async () => {
+        const data = await pb.collection('leaderboard').getFullList();
+        console.log(data)
+        setItems(data)
+      };
+
+
+
+    
+
+    
+  return (
+
+    
+    <View style={style.centerAuto}>
+        <View style={{ position:"relative" }}>
+            <Text style={style.textMain}>Leaderboard</Text>
+        </View>
+
+        {items.map(({ id, name, score }) => {
+            return (
+                <ListBox id={id} name={name} score={score}/>
+            )
+        })}
+        
+        
+    </View>
+        
+  );
+}
+
+
+const style = StyleSheet.create({
+    
+  
+    textMain: {
+      fontSize: 32,
+      textAlign: "center",
+  
+      // fontFamily: "Chakra Petch",
+    },
+  });
+
