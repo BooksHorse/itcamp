@@ -1,8 +1,9 @@
-import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StartScreen } from "./Pages/StartScreen";
-import { GameScreen } from "./Pages/GameScreen";
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {StartScreen} from './Pages/StartScreen';
+import {GameScreen} from './Pages/GameScreen';
+import { AdminScreen } from './Pages/AdminScreen';
 //import {StartScreen} from './Pages/StartScreen';
 import { DeviceEventEmitter } from "react-native";
 import { ScoreUploadScreen } from "./Pages/ScoreUploadScreen";
