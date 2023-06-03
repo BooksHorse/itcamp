@@ -1,9 +1,18 @@
 import * as React from 'react';
-import { Button , View,Text,StyleSheet, TouchableOpacity} from 'react-native';
+import { Button , View,Text,StyleSheet, TouchableOpacity,ScrollView} from 'react-native';
 import { Card } from '@rneui/themed';
+import { pb } from '../Plugins/pocketbase';
 
 
 export function StartScreen({navigation}) {
+    const [load,setLoad] = React.useState(false);
+    const [board,setBoard] = React.useState([]);
+    React.useEffect(() => {
+        pb.collection('leaderboard').getFullList({
+            sort: '-created',
+        })
+        .then(setBoard).finally( () =>setLoad(false));
+    });
     return (
         <View >
             <Card style = {style.Main}>
@@ -12,6 +21,12 @@ export function StartScreen({navigation}) {
                 {buttonyes("START",() => navigation.navigate('GameScreen'))} 
                 {buttonyes("ADMIN",() => navigation.navigate('GameScreen'))} 
                 
+            </Card>
+            <Card style = {style.Main}>
+                <Text>Leaderboard</Text>
+                <ScrollView>
+            {board.map((entry) => (<><Text>Name: {entry.name} </Text><Text>Score: {entry.score}</Text></>))}
+            </ScrollView>
             </Card>
         </View>
 
