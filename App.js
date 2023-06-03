@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {StartScreen} from './Pages/StartScreen';
 import {GameScreen} from './Pages/GameScreen';
+import { AdminScreen } from './Pages/AdminScreen';
 //import {StartScreen} from './Pages/StartScreen';
 import {DeviceEventEmitter} from "react-native"
 const Stack = createNativeStackNavigator();
@@ -24,9 +25,9 @@ console.log("Score:",currentScore);
   return (
     <scoreContext.Provider value={currentScore}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='StartScreen'>
+      <Stack.Navigator initialRouteName='AdminScreen'>
         <Stack.Screen name='StartScreen' component={StartScreen}  /> 
-      
+        <Stack.Screen name='AdminScreen' component={AdminScreen}  /> 
         <Stack.Screen name='GameScreen' component={GameScreen} initialParams={{score:currentScore}} />
         
         {/* <Stack.Screen name='StartScreen' component={StartScreen}  />  */}
