@@ -40,7 +40,7 @@ export function AdminScreen({ navigation }) {
           placeholder="correct choice"
           onChangeText={setqq}
         ></TextInput>
-        <Button
+        <Button mode="contained"
           title="add"
           onPress={() => {
             const data = {
@@ -53,7 +53,7 @@ export function AdminScreen({ navigation }) {
 
             pb.collection("question").create(data);
           }}
-        ></Button>
+        >ADD</Button>
       </View>
     </ScrollView>
   );
