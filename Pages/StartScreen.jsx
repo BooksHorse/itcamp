@@ -14,13 +14,15 @@ export function StartScreen({navigation}) {
         .then(setBoard).finally( () =>setLoad(false));
     });
     return (
-        <View >
-            <Card style = {style.Main}>
-                <Text style = {style.CardTitle}>Genius</Text>
-
-                {buttonyes("START",() => navigation.navigate('GameScreen'))} 
-                {buttonyes("ADMIN",() => navigation.navigate('GameScreen'))} 
+        <View style={{  flex:1, justifyContent:"center", }}>
+            <Card containerStyle = {style.main}>
                 
+                    <Text style = {style.CardTitle}>Genema</Text>
+                
+
+                {buttonyes("PRESS TO START",() => navigation.navigate('GameScreen'))} 
+                {buttonyes("ADMIN",() => navigation.navigate('GameScreen'))} 
+
             </Card>
             <Card style = {style.Main}>
                 <Text>Leaderboard</Text>
@@ -36,20 +38,19 @@ export function StartScreen({navigation}) {
 
 
 const style = StyleSheet.create({
-    Main:{
-        width: 200,
-        height: 100,
-        alignItems: "center",
-        justifyContent: "center",
-        flex: 1,
-        borderRadius: 20,
+    main:{
+        position: "relative",
+        borderRadius: 15,
+        
 
+        
     },
 
     CardTitle:{
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 15,
+        margin:10,
     },
 
     Button: {
@@ -57,9 +58,8 @@ const style = StyleSheet.create({
         borderRadius: 5,
         alignItems: "center",
         margin: 10,
-        padding: 10
-        
-    }
+        padding: 10    
+    },
 
 
 })
