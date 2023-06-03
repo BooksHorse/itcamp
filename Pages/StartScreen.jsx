@@ -10,7 +10,7 @@ export function StartScreen({navigation}) {
     const [board,setBoard] = React.useState([]);
     React.useEffect(() => {
         pb.collection('leaderboard').getFullList({
-            sort: '-created',
+            sort: '-score',
         })
         .then(setBoard).finally( () =>setLoad(false));
     });
