@@ -16,7 +16,7 @@ export function AdminScreen({navigation}) {
     return (
         <View >
             
-            {load && board.map((bo) =>boardentry(board[0]) ) }
+            {load && board.map((bo) =>boardentry(bo) ) }
         </View>
 
     );
@@ -28,7 +28,7 @@ function boardentry(entry) {
 
     return (
 
-        <><Button style={style.delbutton} title="X" onPress={() => {pb.collection('leaderboard').delete(entry.id) } }></Button><Text>{entry.name} </Text></>
+        <><Button style={style.delbutton} title="X" onPress={() => {pb.collection('leaderboard').delete(entry.id) } }></Button><Text>{entry.name} {entry.score}</Text></>
     )
 }
 
