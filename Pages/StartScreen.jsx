@@ -6,12 +6,12 @@ import { Card } from '@rneui/themed';
 export function StartScreen({navigation}) {
     return (
         <View >
-            <Card style = {style.Main}>
-                <Text style = {style.CardTitle}>Genius</Text>
+            <Card style = {style.main}>
+                <Text style = {style.CardTitle}>Genius Math</Text>
 
                 {buttonyes("START",() => navigation.navigate('GameScreen'))} 
                 {buttonyes("ADMIN",() => navigation.navigate('GameScreen'))} 
-                
+
             </Card>
         </View>
 
@@ -21,20 +21,17 @@ export function StartScreen({navigation}) {
 
 
 const style = StyleSheet.create({
-    Main:{
+    main:{
         width: 200,
         height: 100,
-        alignItems: "center",
-        justifyContent: "center",
-        flex: 1,
-        borderRadius: 20,
-
+        borderRadius: 30,
     },
 
     CardTitle:{
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 15,
+        margin:10,
     },
 
     Button: {
@@ -42,9 +39,8 @@ const style = StyleSheet.create({
         borderRadius: 5,
         alignItems: "center",
         margin: 10,
-        padding: 10
-        
-    }
+        padding: 10    
+    },
 
 
 })
