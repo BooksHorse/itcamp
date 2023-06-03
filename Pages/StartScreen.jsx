@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button , View,Text,StyleSheet, TouchableOpacity,ScrollView} from 'react-native';
 import { Card } from '@rneui/themed';
 import { pb } from '../Plugins/pocketbase';
+import ListBox from "../Components/ListBox"
 
 
 export function StartScreen({navigation}) {
@@ -25,9 +26,26 @@ export function StartScreen({navigation}) {
 
             </Card>
             <Card style = {style.Main}>
-                <Text>Leaderboard</Text>
-                <ScrollView>
-            {board.map((entry) => (<><Text>Name: {entry.name} </Text><Text>Score: {entry.score}</Text></>))}
+                <ScrollView style={style.centerAuto}>
+            {/* {board.map((entry) => (<><Text>Name: {entry.name} </Text><Text>Score: {entry.score}</Text></>))} */}
+
+
+    
+      
+        <View style={{ position:"relative" }}>
+            <Text style={style.textMain}>Leaderboard</Text>
+        </View>
+
+        {board.map(({ id, name, score }) => {
+            return (
+                <ListBox id={id} name={name} score={score}/>
+            )
+        })}
+        
+        
+
+
+
             </ScrollView>
             </Card>
         </View>
@@ -59,7 +77,12 @@ const style = StyleSheet.create({
         alignItems: "center",
         margin: 10,
         padding: 10    
-    },
+    },textMain: {
+        fontSize: 32,
+        textAlign: "center",
+    
+        // fontFamily: "Chakra Petch",
+      },
 
 
 })
