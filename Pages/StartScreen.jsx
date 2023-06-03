@@ -21,7 +21,7 @@ export function StartScreen({navigation}) {
                 
 
                 {buttonyes("PRESS TO START",() => navigation.navigate('GameScreen'))} 
-                {buttonyes("ADMIN",() => navigation.navigate('GameScreen'))} 
+                {buttonyes("ADMIN",() => navigation.navigate('AdminScreen'))} 
 
             </Card>
             <Card style = {style.Main}>

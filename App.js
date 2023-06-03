@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {StartScreen} from './Pages/StartScreen';
 import {GameScreen} from './Pages/GameScreen';
 import { AdminScreen } from './Pages/AdminScreen';
-//import {StartScreen} from './Pages/StartScreen';
 import { DeviceEventEmitter } from "react-native";
 import { ScoreUploadScreen } from "./Pages/ScoreUploadScreen";
 const Stack = createNativeStackNavigator();
@@ -38,10 +37,18 @@ export default function App() {
             }
          }} 
           component={StartScreen}  />
-        <Stack.Screen
-          name="Profile"
-          component={StartScreen}
-          options={({ route }) => ({ title: route.params.name })}
+                <Stack.Screen
+          name="GameScreen"
+          component={GameScreen}
+        />
+                  
+                <Stack.Screen
+          name="AdminScreen"
+          component={AdminScreen}
+        />
+                        <Stack.Screen
+          name="ScoreUploadScreen"
+          component={ScoreUploadScreen}
         />
         {/* options={{ title: "Home | MobileAnt App", headerBackVisible: false }} */}
       </Stack.Navigator>
