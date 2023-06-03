@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { Button , View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import { Card } from '@rneui/themed';
+import { StackActions } from '@react-navigation/native';
 
 
 export function StartScreen({navigation}) {
     return (
-        <View >
-            <Card style = {style.main}>
-                <Text style = {style.CardTitle}>Genius Math</Text>
+        <View style={{  flex:1, justifyContent:"center", }}>
+            <Card containerStyle = {style.main}>
+                
+                    <Text style = {style.CardTitle}>Genema</Text>
+                
 
-                {buttonyes("START",() => navigation.navigate('GameScreen'))} 
+                {buttonyes("PRESS TO START",() => navigation.navigate('GameScreen'))} 
                 {buttonyes("ADMIN",() => navigation.navigate('GameScreen'))} 
 
             </Card>
@@ -22,9 +25,11 @@ export function StartScreen({navigation}) {
 
 const style = StyleSheet.create({
     main:{
-        width: 200,
-        height: 100,
-        borderRadius: 30,
+        position: "relative",
+        borderRadius: 15,
+        
+
+        
     },
 
     CardTitle:{
