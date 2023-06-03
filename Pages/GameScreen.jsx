@@ -1,71 +1,83 @@
 import * as React from "react";
-import { Button, View, StyleSheet,Text } from "react-native";
+import { Button, View, StyleSheet, Text } from "react-native";
 import { ButtonsChoice } from "../Components/Buttons";
-import {pb} from '../Plugins/pocketbase'
+import { pb } from "../Plugins/pocketbase";
+import {DeviceEventEmitter} from "react-native"
+import { scoreContext } from "../App";
 
-export function GameScreen() {
-    /**
- * @type {name:string,content:{choices:string[4],correct:number}}
- */
-    const [questions,setquestions] = React.useState([]);
-    const [title,setTitle] = React.useState("");
-    const [currentQuestionNo,setcurrentQuestionNo] = React.useState(0);
-    const [choice,setChoice] = React.useState([]);
-    let a = false;
-React.useEffect(async () => {
-    let questionss = await pb.collection('question').getFullList();
-    setquestions(questionss);
-    console.log(questionss);
-    setTitle(questionss[currentQuestionNo].title);
-    setChoice(questionss[currentQuestionNo].content);
-    console.log("sdad",questionss[currentQuestionNo].content);
-    a=true;
-},[])
-   
+export function GameScreen({route,navigation}) {
+  let ff =React.useContext(scoreContext);
+  /**
+   * @type {name:string,content:{choices:string[4],correct:number}}
+   */
+  const [questions, setquestions] = React.useState([]);
+  const [title, setTitle] = React.useState("");
+  const [currentQuestionNo, setcurrentQuestionNo] = React.useState(0);
+  const [choice, setChoice] = React.useState("");
+  const [a, seta] = React.useState(false);
+  React.useEffect(() => {
+    pb.collection("question")
+      .getFullList()
+      .then((record) => {
+        setquestions(record);
+        console.log("record:", record);
+        return record;
+      })
+      .then((record) => {
+        setTitle(record[currentQuestionNo].title);
+        setChoice(record[currentQuestionNo].content);
+        console.log("sdad", record[currentQuestionNo]);
+      }).catch(e => console.error("err",e))
+      .finally(() => {
+        seta(true);
+      });
+  }, []);
 
- 
+  const [selectedChoice, setselectedChoice] = React.useState(-1);
 
-     const [selectedChoice,setselectedChoice] = React.useState(-1);
-    
-     function onPress(choice,correct) {
-        setTitle(questions[currentQuestionNo].title);
-        setselectedChoice(choice);
-        console.log(choice);
-         if (choice === correct) {
-            console.log("correct");
-            
-             if (currentQuestionNo+1 !== questions.length) {
-             setcurrentQuestionNo(currentQuestionNo+1)
-             
-             }
-             else {
-                 //finish game
-             }
-             setTitle(questions[currentQuestionNo].title);
-         }
-     }
+  function onPress(choice, correct) {
+    // setTitle(questions[currentQuestionNo].title);
+    // setselectedChoice(choice);
+    console.log(choice);
+    if (choice === correct) {
+      console.log("correct");
+      DeviceEventEmitter.emit("event.scored",{});
+      if (currentQuestionNo + 1 < questions.length) {
+        setChoice(questions[currentQuestionNo+1].content);
+        setTitle(questions[currentQuestionNo+1].title);
+        setcurrentQuestionNo(currentQuestionNo + 1);
+        
+      } else {
+        console.log("game done");
+        //finish game
+      }
+      
+    }
+  }
 
-     function changequestion() {
-        setTitle(questions[currentQuestionNo].title);
-     }
-
-
-  return (
-    <View>
+  function changequestion() {
+    setTitle(questions[currentQuestionNo].title);
+  }
+  console.log("aaaaa",a === true && questions)
+  if (a === true && questions) {
+    // console.log("dadadaddad",questions[0].content)
+    return (
+      <View>
         <Text>current choice :{selectedChoice}</Text>
 
         <Text>q no :{currentQuestionNo}</Text>
+        <Text>score:{ff}</Text>
 
         <Text>{title}</Text>
 
-{ a==true && <ButtonsChoice choices={{choice}} press={onPress}></ButtonsChoice>
-}
-
-
-    </View>
-
-
-  );
+        <ButtonsChoice choices={choice} press={onPress}></ButtonsChoice>
+      </View>
+    );
+  } else {
+    <View>
+      <text>Loading</text>
+    </View>;
+  }
 }
 
 const style = StyleSheet.create({

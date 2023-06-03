@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Button, View, StyleSheet } from "react-native";
+import { Button, View, StyleSheet ,Text} from "react-native";
 import {pb} from '../Plugins/pocketbase'
 
 export function ButtonsChoice({choices,press}) {
-
+  console.log("fdasfsfffff",choices);
   return (
     <View>
       <View style={style.row}>
