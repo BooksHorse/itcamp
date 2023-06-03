@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {  View,Text,StyleSheet, TouchableOpacity,TextInput} from 'react-native';
-import { useTheme ,Button} from 'react-native-paper';
+import {  View,Text,StyleSheet, TouchableOpacity} from 'react-native';
+import { useTheme ,Button,TextInput} from 'react-native-paper';
 import { scoreContext } from "../App";
 import {pb} from "../Plugins/pocketbase"
 

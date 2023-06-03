@@ -1,15 +1,14 @@
 import * as React from "react";
 import {
-  Button,
+
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
   ScrollView,
 } from "react-native";
 import { Card } from "@rneui/themed";
 import { pb } from "../Plugins/pocketbase";
+import { useTheme ,Button,TextInput,Text} from 'react-native-paper';
 
 export function AdminScreen({ navigation }) {
   const [load, setLoad] = React.useState(false);
@@ -33,10 +32,10 @@ export function AdminScreen({ navigation }) {
       <View>{load && board.map((bo) => boardentry(bo))}</View>
       <View>
         <TextInput placeholder="question" onChangeText={setq}></TextInput>
-        <TextInput placeholder="choice1" onChangeText={setq1}></TextInput>
-        <TextInput placeholder="choice2" onChangeText={setq2}></TextInput>
-        <TextInput placeholder="choice3" onChangeText={setq3}></TextInput>
-        <TextInput placeholder="choice4" onChangeText={setq4}></TextInput>
+        <TextInput placeholder="choice0" onChangeText={setq1}></TextInput>
+        <TextInput placeholder="choice1" onChangeText={setq2}></TextInput>
+        <TextInput placeholder="choice2" onChangeText={setq3}></TextInput>
+        <TextInput placeholder="choice3" onChangeText={setq4}></TextInput>
         <TextInput
           placeholder="correct choice"
           onChangeText={setqq}
@@ -63,13 +62,13 @@ export function AdminScreen({ navigation }) {
 function boardentry(entry) {
   return (
     <>
-      <Button
+      <Button mode="outlined" contentStyle={{margin:0,height:50}}
         style={style.delbutton}
         title="X"
         onPress={() => {
           pb.collection("leaderboard").delete(entry.id);
         }}
-      ></Button>
+      >X</Button>
       <Text>
         name:{entry.name}, score:{entry.score}
       </Text>
