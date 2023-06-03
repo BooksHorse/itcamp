@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { Button , View,Text,StyleSheet, TouchableOpacity,TextInput} from 'react-native';
+import {  View,Text,StyleSheet, TouchableOpacity,TextInput} from 'react-native';
+import { useTheme ,Button} from 'react-native-paper';
 import { scoreContext } from "../App";
 import {pb} from "../Plugins/pocketbase"
 
 export function ScoreUploadScreen({navigation}) {
+    const theme = useTheme();
     const [name,setName] = React.useState("");
-    let score = React.useContext(scoreContext);
+    let [score,setff] = React.useContext(scoreContext);
     async function uploadScore() {
 
         const data = {
@@ -16,15 +18,15 @@ export function ScoreUploadScreen({navigation}) {
         const record = await pb.collection('leaderboard').create(data);
         navigation.goBack();
         navigation.goBack();
-        
+        setff(0);
     }
     return (
         <View >
         <Text >Your Score: {score}</Text>
         <TextInput value={name} onChangeText={setName} placeholder="Your username">
         </TextInput>
-        <Button title='Finish' onPress={uploadScore}>
-        
+        <Button title='Finish' mode="contained-tonal" onPress={uploadScore}>
+        Finish
         </Button>
         </View>
     

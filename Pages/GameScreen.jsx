@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { ButtonsChoice } from "../Components/Buttons";
 import { pb } from "../Plugins/pocketbase";
 import { DeviceEventEmitter } from "react-native";
@@ -15,6 +15,7 @@ export function GameScreen({ route, navigation }) {
   const [currentQuestionNo, setcurrentQuestionNo] = React.useState(0);
   const [choice, setChoice] = React.useState(-1);
   const [a, seta] = React.useState(false);
+  console.log("scoressss",ff.score);
   React.useEffect(() => {
     pb.collection("question")
       .getFullList()
@@ -33,7 +34,8 @@ export function GameScreen({ route, navigation }) {
         seta(true);
       });
   }, []);
-
+  DeviceEventEmitter.addListener("event.scored", (eventData) => {
+  });
   const [selectedChoice, setselectedChoice] = React.useState(-1);
 
   function onPress(choice, correct) {
@@ -42,8 +44,11 @@ export function GameScreen({ route, navigation }) {
     console.log(choice);
     if (choice === correct) {
       console.log("correct");
+
       DeviceEventEmitter.emit("event.scored", {});
+      // ff.setScore(ff+1);
       if (currentQuestionNo + 1 < questions.length) {
+        
         setChoice(questions[currentQuestionNo + 1].content);
         setTitle(questions[currentQuestionNo + 1].title);
         setcurrentQuestionNo(currentQuestionNo + 1);
@@ -54,6 +59,18 @@ export function GameScreen({ route, navigation }) {
         navigation.navigate("ScoreUploadScreen");
         //         setChoice(-1);
         // setcurrentQuestionNo(-1);
+      }
+    } else {
+      if (currentQuestionNo + 1 < questions.length) {
+      setChoice(questions[currentQuestionNo + 1].content);
+      setTitle(questions[currentQuestionNo + 1].title);
+      setcurrentQuestionNo(currentQuestionNo + 1);
+      }
+      else{
+        console.log("game done");
+        //finish game
+
+        navigation.navigate("ScoreUploadScreen");
       }
     }
   }

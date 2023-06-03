@@ -1,16 +1,20 @@
 import * as React from 'react';
-import { Button , View,Text,StyleSheet, TouchableOpacity,ScrollView} from 'react-native';
+import { View,StyleSheet, TouchableOpacity,ScrollView} from 'react-native';
 import { Card } from '@rneui/themed';
 import { pb } from '../Plugins/pocketbase';
 import ListBox from "../Components/ListBox"
 
+
 import {  useFonts, ChakraPetch_400Regular,ChakraPetch_500Medium} from '@expo-google-fonts/chakra-petch';
-
-
+import {Text,Button} from  'react-native-paper';
+import { scoreContext } from "../App";
 export function StartScreen({navigation}) {
     let [fontsLoaded] = useFonts({
         ChakraPetch_400Regular,ChakraPetch_500Medium
       })
+
+      let ff = React.useContext(scoreContext);
+      
     
 
 
@@ -111,10 +115,13 @@ const style = StyleSheet.create({
 
 
 function buttonyes(text,func) {
-    return <TouchableOpacity style={style.Button}
-        onPress={func}>
-        <Text>{text}</Text>
-    </TouchableOpacity>;
+    // return <TouchableOpacity style={style.Button}
+    //     onPress={func}>
+    //     <Text>{text}</Text>
+    // </TouchableOpacity>;
+
+
+    return <View style={{padding:5}}><Button mode="contained-tonal" onPress={func}>{text}</Button></View>
 }
 // export function StartScreen({navigation}) {
 //     return (
