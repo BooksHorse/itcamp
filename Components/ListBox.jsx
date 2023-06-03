@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 
-function ListBox({ id, name, score }) {
+function ListBox({ id, name, score ,place}) {
   return (
     <ScrollView>
       <View style={style.boxMain}>
@@ -11,7 +11,7 @@ function ListBox({ id, name, score }) {
             transform: [{ translateX: -2 }, { translateY: -20 }],
           }}
         >
-          <Text style={{ fontSize: 35 }}>{}1</Text>
+          <Text style={{ fontSize: 35 }}>{place}</Text>
         </View>
 
         <View style={style.textInside}>

@@ -36,9 +36,9 @@ export function StartScreen({navigation}) {
             <Text style={style.textMain}>Leaderboard</Text>
         </View>
 
-        {board.map(({ id, name, score }) => {
+        {board.map(({ id, name, score },index) => {
             return (
-                <ListBox id={id} name={name} score={score}/>
+                <ListBox id={id} name={name} score={score} place={index+1}/>
             )
         })}
         
